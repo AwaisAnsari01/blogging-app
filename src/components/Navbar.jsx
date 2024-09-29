@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 function Navbar() {
   const [pic, setPic] = useState('');
   const [u, setU] = useState(null);
-  const navigate = useNavigate();  // Added to use navigate function
+  const navigate = useNavigate();
 
   useEffect(() => {
      onAuthStateChanged(auth, async (user) => {
@@ -35,7 +35,7 @@ function Navbar() {
           let userOne = [];
           usersSnapshot.forEach((doc) => {
             userOne.push(doc.data());
-            setPic(doc.data().userPic);  // Set user profile picture
+            setPic(doc.data().userPic);
           });
         } catch (error) {
           console.error("Error fetching user data:", error);
@@ -64,20 +64,20 @@ function Navbar() {
 
   return (
     <>
-      <div className="navbar black-bg l-color p-3 flex items-center justify-between">
+      <div className="navbar black-bg flex items-center justify-between">
         <div className='shadow-md w-[30rem] px-[1rem] py-[.4rem] flex justify-start items-center gap-5'>
           <p className='text-[2rem]'><FaShopify /></p>
-          <h1 className='font-bold text-[1.9rem]'>Personal Blogging Website</h1>
+          <h1 className='font-bold text-[1.9rem]'> Blogging App</h1>
         </div>
 
-        <div className="w-[36rem] px-[1rem] py-[.4rem] flex justify-start items-center gap-5 ">
+        <div className="w-[20rem] px-[1rem] py-[.4rem] flex justify-end items-center gap-5 ">
           {u ? (
             <>
               <Link to="" className='text-[1.4rem]'>Home</Link>
               <Link to="dashboard" className='text-[1.4rem]'>Dashboard</Link>
 
               <button
-                className='w-[6rem] black-color l-gray-bg hover:bg-[#6333e8] py-2 px-3 rounded-lg block'
+                className='w-[6rem] black-color l-gray-bg py-2 px-3 rounded-lg block'
                 onClick={signOuts}
               >
                 Signout
@@ -89,9 +89,9 @@ function Navbar() {
             </>
           ) : (
             <>
-              <Link to="" className='text-[1.4rem]'>Home</Link>
-              <Link to="login" className='text-[1.4rem]'>Login</Link>
-              <Link to="register" className='text-[1.4rem]'>Register</Link>
+              <button><Link to="" className='text-[1.4rem]'>Home</Link></button>
+              <button><Link to="login" className='text-[1.4rem]'>Login</Link></button>
+              <button><Link to="register" className='text-[1.4rem]'>Register</Link></button>
             </>
           )}
         </div>

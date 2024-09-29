@@ -4,11 +4,11 @@ import { db } from '../firebaseConfig/firebaseMethod';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function SingleUser() {
-  const { uid } = useParams();  // Get the uid from the route parameter
+  const { uid } = useParams(); 
   let navigate = useNavigate();
   const [profileData, setProfileData] = useState([]);
 
-  // Fetch user data from Firestore
+ 
   useEffect(() => {
     const getUserBlogs = async () => {
       const q = query(collection(db, "users"), where("uid", "==", uid));
@@ -16,7 +16,7 @@ function SingleUser() {
       let userOne = [];
       usersSnapshot.forEach((doc) => {
         console.log(doc.data());
-        userOne.push(doc.data()); // Collect user data
+        userOne.push(doc.data()); 
       });
       setProfileData(userOne);
     };
@@ -24,7 +24,7 @@ function SingleUser() {
     getUserBlogs();
   }, [uid]);
 
-  // Function to navigate to user's blogs
+  
   function myBlogs(uid) {
     navigate(`/singleUserBlogs/${uid}`);
   }
@@ -35,9 +35,9 @@ function SingleUser() {
 
       {profileData.length > 0 ? profileData.map((item, index) => (
         <div key={index} className="mt-[3rem] flex justify-center items-center">
-          {/* Profile Card */}
+         
           <div className="l-bg w-[40rem] border-[.1rem] border-[#d8d7d7] max-w-lg shadow-lg rounded-lg overflow-hidden p-[2rem]">
-            {/* Profile Image */}
+           
            
             <div className="h-[15rem] flex justify-center items-center">
               <img 
@@ -47,7 +47,7 @@ function SingleUser() {
               />
             </div>
         
-            {/* Profile Info */}
+           
             <div className="p-6 text-center">
             <h2 className="text-2xl font-semibold capitalize">{item.firstName}</h2>
               <button 

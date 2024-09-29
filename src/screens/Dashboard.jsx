@@ -24,7 +24,7 @@ function Dashboard() {
   let [username, setUsername] = useState(null)
   let [docId, setDocId] = useState("")
 
-  // get data from firestore 
+  
   async function getDataFromFirestore() {
 
     onAuthStateChanged(auth, async (user) => {
@@ -33,12 +33,12 @@ function Dashboard() {
         setUserUid(user.uid)
 
 
-        // get user data from firestore 
+        
         const q = query(collection(db, "users"), where("uid", "==", uid));
         const usersSnapshot = await getDocs(q);
-        let userOne = []; // Temporary array to hold the blogs
+        let userOne = [];
         usersSnapshot.forEach((doc) => {
-          //  set user pic for pushing in array
+         
           setPic(doc.data().userPic)
           setUsername(doc.data().firstName)
 
@@ -47,7 +47,7 @@ function Dashboard() {
         });
 
 
-        // get blogs data from fire store 
+       
         const q2 = query(collection(db, "Blogs"), where("uid", "==", uid));
         const blogsSnapshot = await getDocs(q2);
         let Blogs = [];
@@ -70,13 +70,13 @@ function Dashboard() {
 
   }
 
-  // call data 
+  
   useEffect(() => {
     getDataFromFirestore()
   }, [])
 
 
-  // add blogs function 
+  
   async function addBlog(event) {
     event.preventDefault()
     console.log(username);
@@ -91,7 +91,7 @@ function Dashboard() {
     });
     console.log("Document written with ID: ", docRef.id);
 
-    // blogArr.push({title : title.current.value , description : description.current.value})
+  
 
     Swal.fire({
       title: "Good job!",
@@ -107,7 +107,7 @@ function Dashboard() {
   }
 
 
-  // delete Blog 
+  
   async function deleteBlog(index, id) {
     console.log(id);
 
@@ -124,20 +124,20 @@ function Dashboard() {
 
 
 
-  // JSX 
+  
   return (
     <>
       <div className=" l-bg l-color shadow-md w-[70rem] mt-[2rem] mx-auto py-4 px-[5rem]">
         <h2 className="form-title text-[2rem] text-center">Create a New Blog Post</h2>
         <form className="form" onSubmit={addBlog}>
-          {/* title  */}
+  
           <input
             type="text"
             className=" text-[1.3rem] border-[.1rem] border-[#8f8f8f] p-2  block black-color w-[60rem] rounded-lg  mx-auto px-[1.3rem] py-[1rem] mt-[1.4rem]"
             ref={title}
             placeholder='Title'
             name="title" />
-          {/* description  */}
+  
           <textarea className="mt-[2rem]  border-[.1rem] border-[#8f8f8f] text-[1.3rem] w-[60rem] rounded-lg block mx-auto px-[1.3rem] py-[1rem] black-color"
             placeholder='Description'
             name="description"
@@ -145,17 +145,17 @@ function Dashboard() {
             rows="4"
           ></textarea>
 
-          <button type="submit" className=" publish-button mt-[2rem] black-bg hover:bg-[#8b65f1] l-color block ms-auto  p-3 rounded-lg">Publish Blog</button>
+          <button type="submit" className="mt-[2rem] black-bg text-white 2-color block ms-auto  p-3 rounded-lg">Publish Blog</button>
         </form>
       </div>
 
-      {/* render Blogs  */}
+    
       <div className=' my-5 '>
         {blogArr && blogArr.map((item, index) => {
           return (
             <div className='w-[1050px] border-[.1rem] border-[#d8d7d7]  p-5 mx-auto l-bg shadow-lg rounded-lg overflow-hidden mt-5' key={index}>
 
-              {/* image and username  */}
+              
               <div className='flex items-center justify-start p-4 l-bg rounded-md'>
                 <img src={item.pic} className='h-[80px] w-[80px] object-contain rounded-full mr-4 shadow-lg shadow-slate-800' alt="Profile" />
                 <div>
@@ -163,7 +163,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              {/* title and description  */}
+             
               <div className='p-4 text-left'>
                 <h2 className='text-[1.5rem] mt-3 font-[600] capitalize text-black'><span className='font-bold '></span> {item.title}</h2>
                 <p className='text-[1.2rem]  mt-3'><span className='font-semibold'></span> {item.description}</p>

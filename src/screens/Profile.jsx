@@ -18,10 +18,10 @@ function Profile() {
       if (user) {
         const uid = user.uid;
 
-        // call user data from firestore 
+  
         const q = query(collection(db, "users"), where("uid", "==", uid));
         const usersSnapshot = await getDocs(q);
-        let userOne = []; // Temporary array to hold the blogs
+        let userOne = [];
         usersSnapshot.forEach((doc) => {
 
           userOne.push(doc.data());
@@ -36,7 +36,6 @@ function Profile() {
     })
   }
 
-  // call get function 
   useEffect(() => {
     getDataFromFirestore()
   }, [])
@@ -47,7 +46,7 @@ function Profile() {
 
   }
 
-  // JSX 
+
   return (
     <>
     <div>
@@ -58,18 +57,18 @@ function Profile() {
       {profileData.length > 0 ? profileData.map((item, index) => {
         return (
           <div key={index} className="mt-[3rem] flex justify-center items-center">
-            {/* Profile Card */}
+            
             <div className=" l-bg w-[40rem] border-[.1rem] border-[#d8d7d7] max-w-lg shadow-lg rounded-lg overflow-hidden p-[2rem]">
-              {/* Profile Image */}
+              
               <div className="h-[15rem] flex justify-center items-center">
                 <img
                   src={item.userPic}
                   alt="Profile"
-                  className="rounded-full h-[14rem] bg-black shadow-violet-300 w-[14rem] object-contain border-4 border-white shadow-lg" // Changed from object-cover to object-contain
+                  className="rounded-full h-[14rem] bg-black shadow-violet-300 w-[14rem] object-contain border-4 border-white shadow-lg"
                 />
               </div>
 
-              {/* Profile Info */}
+              
               <div className="p-6 text-center">
                 <h2 className="text-2xl font-semibold capitalize">{item.firstName}</h2>
                 

@@ -23,7 +23,7 @@ function Register() {
   let navigate = useNavigate()
   const storage = getStorage();
 
-  //  make image url function 
+
   async function showUrl(files) {
     const storageRef = ref(storage, email.current.value);
 
@@ -57,7 +57,7 @@ function Register() {
       const user = userCredential.user;
       console.log(user.uid);
 
-      // Add user data to Firestore
+      
       const docRef = await addDoc(collection(db, "users"), {
         firstName: firstName.current.value,
         lastName: lastName.current.value,
@@ -75,9 +75,9 @@ function Register() {
        
         window.location.reload();
       });
-      // signout after register 
+      
       await signOut(auth);
-      // Redirect to login page
+      
       navigate("/login");
     }
 
@@ -95,7 +95,7 @@ function Register() {
         <form id="forms" onSubmit={signUpUserAndSaveUserData} className='shadow-md l-bg   py-[1rem] px-[1.5rem] rounded-xl mt-[3rem] text-center'>
           <h1 className='text-center  text-[2rem]'>Register</h1>
 
-          {/* first Name  */}
+         
           <input
             type="text"
             ref={firstName}
@@ -104,7 +104,7 @@ function Register() {
             placeholder=" First Name"
           />
 
-          {/* Last Name  */}
+          
           <input
             type="text"
             ref={lastName}
@@ -113,7 +113,7 @@ function Register() {
             placeholder=" Last Name"
           />
 
-          {/* Email  */}
+         
           <input
             type="email"
             ref={email}
@@ -122,7 +122,7 @@ function Register() {
             placeholder=" Email"
           />
 
-          {/* Password  */}
+          
           <input
             type="password"
             className="py-[.4rem] border  w-[20rem] px-[.6rem] block mt-[1rem] text-center"
@@ -138,11 +138,8 @@ function Register() {
             className="py-[.3rem] border bg-white w-[20rem] block px-[.6rem] mt-[1rem] text-center"
           />
 
-          {/* Photo  */}
-          <Link to="/" className='block mt-[1rem]  hover:text-[#697565] text-[1.2rem]'>already register, then login </Link>
-          <br />
-
-          {/* Register button  */}
+         <br />
+          
           <button
             type="submit"
             className="logins black-bg hover:bg-[#8b65f1] py-[.5rem] rounded-md   w-[6rem] px-[.8rem] l-color "
